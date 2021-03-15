@@ -1,8 +1,9 @@
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:multiweather/flows/cities_setup/views/views.dart';
 
+import 'views/views.dart';
 import 'city_select.dart';
+
 export 'city_select.dart';
 
 class CitySelectFlow extends StatelessWidget {

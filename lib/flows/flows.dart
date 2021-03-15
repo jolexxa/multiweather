@@ -1,1 +1,1 @@
-export 'cities_setup/city_select_flow.dart';
+export 'city_select/city_select_flow.dart';
