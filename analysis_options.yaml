@@ -1,0 +1,11 @@
+include: package:pedantic/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - lib/l10n/**
+
+# See [Customizing static analysis](https://dart.dev/guides/language/analysis-options)
+linter:
+  rules:
+    - prefer_final_locals
+    
