@@ -2,13 +2,13 @@ library setup_cities_flow;
 
 import 'package:flutter/material.dart';
 
-class CitiesResultsView extends StatelessWidget {
+class CitySearchView extends StatelessWidget {
   static MaterialPage<void> page() {
-    return MaterialPage<void>(child: CitiesResultsView());
+    return MaterialPage<void>(child: CitySearchView());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text('Hello, cities results view!');
+    return Text('Hello, city search view!');
   }
 }
