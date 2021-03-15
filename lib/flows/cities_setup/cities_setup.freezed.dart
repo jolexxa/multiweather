@@ -15,10 +15,13 @@ class _$CitiesSetupTearOff {
 
 // ignore: unused_element
   _CitiesSetup call(
-      {@required CitiesSetupResult result, @required String city}) {
+      {@required CitiesSetupResult result,
+      @required String city,
+      @required List<Location> citySearchResults}) {
     return _CitiesSetup(
       result: result,
       city: city,
+      citySearchResults: citySearchResults,
     );
   }
 }
@@ -31,6 +34,7 @@ const $CitiesSetup = _$CitiesSetupTearOff();
 mixin _$CitiesSetup {
   CitiesSetupResult get result;
   String get city;
+  List<Location> get citySearchResults;
 
   @JsonKey(ignore: true)
   $CitiesSetupCopyWith<CitiesSetup> get copyWith;
@@ -41,7 +45,10 @@ abstract class $CitiesSetupCopyWith<$Res> {
   factory $CitiesSetupCopyWith(
           CitiesSetup value, $Res Function(CitiesSetup) then) =
       _$CitiesSetupCopyWithImpl<$Res>;
-  $Res call({CitiesSetupResult result, String city});
+  $Res call(
+      {CitiesSetupResult result,
+      String city,
+      List<Location> citySearchResults});
 }
 
 /// @nodoc
@@ -56,10 +63,14 @@ class _$CitiesSetupCopyWithImpl<$Res> implements $CitiesSetupCopyWith<$Res> {
   $Res call({
     Object result = freezed,
     Object city = freezed,
+    Object citySearchResults = freezed,
   }) {
     return _then(_value.copyWith(
       result: result == freezed ? _value.result : result as CitiesSetupResult,
       city: city == freezed ? _value.city : city as String,
+      citySearchResults: citySearchResults == freezed
+          ? _value.citySearchResults
+          : citySearchResults as List<Location>,
     ));
   }
 }
@@ -71,7 +82,10 @@ abstract class _$CitiesSetupCopyWith<$Res>
           _CitiesSetup value, $Res Function(_CitiesSetup) then) =
       __$CitiesSetupCopyWithImpl<$Res>;
   @override
-  $Res call({CitiesSetupResult result, String city});
+  $Res call(
+      {CitiesSetupResult result,
+      String city,
+      List<Location> citySearchResults});
 }
 
 /// @nodoc
@@ -88,28 +102,38 @@ class __$CitiesSetupCopyWithImpl<$Res> extends _$CitiesSetupCopyWithImpl<$Res>
   $Res call({
     Object result = freezed,
     Object city = freezed,
+    Object citySearchResults = freezed,
   }) {
     return _then(_CitiesSetup(
       result: result == freezed ? _value.result : result as CitiesSetupResult,
       city: city == freezed ? _value.city : city as String,
+      citySearchResults: citySearchResults == freezed
+          ? _value.citySearchResults
+          : citySearchResults as List<Location>,
     ));
   }
 }
 
 /// @nodoc
 class _$_CitiesSetup with DiagnosticableTreeMixin implements _CitiesSetup {
-  const _$_CitiesSetup({@required this.result, @required this.city})
+  const _$_CitiesSetup(
+      {@required this.result,
+      @required this.city,
+      @required this.citySearchResults})
       : assert(result != null),
-        assert(city != null);
+        assert(city != null),
+        assert(citySearchResults != null);
 
   @override
   final CitiesSetupResult result;
   @override
   final String city;
+  @override
+  final List<Location> citySearchResults;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CitiesSetup(result: $result, city: $city)';
+    return 'CitiesSetup(result: $result, city: $city, citySearchResults: $citySearchResults)';
   }
 
   @override
@@ -118,7 +142,8 @@ class _$_CitiesSetup with DiagnosticableTreeMixin implements _CitiesSetup {
     properties
       ..add(DiagnosticsProperty('type', 'CitiesSetup'))
       ..add(DiagnosticsProperty('result', result))
-      ..add(DiagnosticsProperty('city', city));
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('citySearchResults', citySearchResults));
   }
 
   @override
@@ -128,14 +153,18 @@ class _$_CitiesSetup with DiagnosticableTreeMixin implements _CitiesSetup {
             (identical(other.result, result) ||
                 const DeepCollectionEquality().equals(other.result, result)) &&
             (identical(other.city, city) ||
-                const DeepCollectionEquality().equals(other.city, city)));
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.citySearchResults, citySearchResults) ||
+                const DeepCollectionEquality()
+                    .equals(other.citySearchResults, citySearchResults)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(result) ^
-      const DeepCollectionEquality().hash(city);
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(citySearchResults);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +175,15 @@ class _$_CitiesSetup with DiagnosticableTreeMixin implements _CitiesSetup {
 abstract class _CitiesSetup implements CitiesSetup {
   const factory _CitiesSetup(
       {@required CitiesSetupResult result,
-      @required String city}) = _$_CitiesSetup;
+      @required String city,
+      @required List<Location> citySearchResults}) = _$_CitiesSetup;
 
   @override
   CitiesSetupResult get result;
   @override
   String get city;
+  @override
+  List<Location> get citySearchResults;
   @override
   @JsonKey(ignore: true)
   _$CitiesSetupCopyWith<_CitiesSetup> get copyWith;

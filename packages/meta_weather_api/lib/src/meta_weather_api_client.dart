@@ -22,7 +22,7 @@ class MetaWeatherApiClient {
   final http.Client _httpClient;
 
   /// Finds a [Location] `/api/location/search/?query=(query)`.
-  Future<Location> locationSearch(String query) async {
+  Future<List<Location>> locationSearch(String query) async {
     final locationRequest = Uri.https(
       _baseUrl,
       '/api/location/search',
@@ -38,8 +38,12 @@ class MetaWeatherApiClient {
       locationResponse.body,
     ) as List;
     return locationJson?.isNotEmpty == true
-        ? Location.fromJson(locationJson.first as Map<String, dynamic>)
-        : null;
+        ? locationJson
+            .map<Location>(
+              (dynamic item) => Location.fromJson(item as Map<String, dynamic>),
+            )
+            .toList()
+        : [];
   }
 
   /// Fetches [Weather] for a given [locationId].
