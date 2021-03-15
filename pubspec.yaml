@@ -23,14 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  intl:
+  flow_builder:
   flutter_bloc:
   flutter_dotenv: ^2.1.0
   flutter_google_places:
+  flutter_localizations:
+    sdk: flutter
   flutter_spinkit:
   freezed_annotation:
+  intl:
   meta_weather_api:
     path: packages/meta_weather_api
   weather_repository:

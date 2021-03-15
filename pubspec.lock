@@ -218,6 +218,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.11"
+  flow_builder:
+    dependency: "direct main"
+    description:
+      name: flow_builder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
