@@ -46,31 +46,40 @@ class _CitySearchViewState extends State<CitySearchView> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: cityController,
-                        decoration: InputDecoration(
-                          hintText: 'City Name',
-                        ),
+                    Center(
+                      child: Text(
+                        'Tip: Try searching "sh", "san", or "new"',
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 16.0),
-                      child: ElevatedButton(
-                        child: Text('SEARCH'),
-                        onPressed: () {
-                          // Update the city portion of the flow, triggering
-                          // the next step in the flow.
-                          flow.update(
-                            (state) => state.copyWith(
-                              city: cityController.text,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: cityController,
+                            decoration: InputDecoration(
+                              hintText: 'City Name',
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 16.0),
+                          child: ElevatedButton(
+                            child: Text('SEARCH'),
+                            onPressed: () {
+                              // Update the city portion of the flow, triggering
+                              // the next step in the flow.
+                              flow.update(
+                                (state) => state.copyWith(
+                                  city: cityController.text,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
