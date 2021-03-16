@@ -30,10 +30,7 @@ class CitySelectFlow extends StatelessWidget {
   static List<Page> onGeneratePages(CitySelect state, List<Page> pages) {
     return [
       CitySearchView.page(),
-      if (state.city != null &&
-          state.citySearchResults != null &&
-          state.citySearchResults.isNotEmpty)
-        CityResultsView.page(),
+      if (state.city != null && state.city.isNotEmpty) CityResultsView.page(),
     ];
   }
 }

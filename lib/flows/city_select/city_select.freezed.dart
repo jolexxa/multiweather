@@ -17,10 +17,12 @@ class _$CitySelectTearOff {
   _CitySelect call(
       {String city = '',
       List<Location> citySearchResults = const [],
+      Location selectedLocation,
       dynamic result = CitySelectResult.pending}) {
     return _CitySelect(
       city: city,
       citySearchResults: citySearchResults,
+      selectedLocation: selectedLocation,
       result: result,
     );
   }
@@ -34,6 +36,7 @@ const $CitySelect = _$CitySelectTearOff();
 mixin _$CitySelect {
   String get city;
   List<Location> get citySearchResults;
+  Location get selectedLocation;
   dynamic get result;
 
   @JsonKey(ignore: true)
@@ -45,7 +48,11 @@ abstract class $CitySelectCopyWith<$Res> {
   factory $CitySelectCopyWith(
           CitySelect value, $Res Function(CitySelect) then) =
       _$CitySelectCopyWithImpl<$Res>;
-  $Res call({String city, List<Location> citySearchResults, dynamic result});
+  $Res call(
+      {String city,
+      List<Location> citySearchResults,
+      Location selectedLocation,
+      dynamic result});
 }
 
 /// @nodoc
@@ -60,6 +67,7 @@ class _$CitySelectCopyWithImpl<$Res> implements $CitySelectCopyWith<$Res> {
   $Res call({
     Object city = freezed,
     Object citySearchResults = freezed,
+    Object selectedLocation = freezed,
     Object result = freezed,
   }) {
     return _then(_value.copyWith(
@@ -67,6 +75,9 @@ class _$CitySelectCopyWithImpl<$Res> implements $CitySelectCopyWith<$Res> {
       citySearchResults: citySearchResults == freezed
           ? _value.citySearchResults
           : citySearchResults as List<Location>,
+      selectedLocation: selectedLocation == freezed
+          ? _value.selectedLocation
+          : selectedLocation as Location,
       result: result == freezed ? _value.result : result as dynamic,
     ));
   }
@@ -78,7 +89,11 @@ abstract class _$CitySelectCopyWith<$Res> implements $CitySelectCopyWith<$Res> {
           _CitySelect value, $Res Function(_CitySelect) then) =
       __$CitySelectCopyWithImpl<$Res>;
   @override
-  $Res call({String city, List<Location> citySearchResults, dynamic result});
+  $Res call(
+      {String city,
+      List<Location> citySearchResults,
+      Location selectedLocation,
+      dynamic result});
 }
 
 /// @nodoc
@@ -95,6 +110,7 @@ class __$CitySelectCopyWithImpl<$Res> extends _$CitySelectCopyWithImpl<$Res>
   $Res call({
     Object city = freezed,
     Object citySearchResults = freezed,
+    Object selectedLocation = freezed,
     Object result = freezed,
   }) {
     return _then(_CitySelect(
@@ -102,6 +118,9 @@ class __$CitySelectCopyWithImpl<$Res> extends _$CitySelectCopyWithImpl<$Res>
       citySearchResults: citySearchResults == freezed
           ? _value.citySearchResults
           : citySearchResults as List<Location>,
+      selectedLocation: selectedLocation == freezed
+          ? _value.selectedLocation
+          : selectedLocation as Location,
       result: result == freezed ? _value.result : result,
     ));
   }
@@ -112,6 +131,7 @@ class _$_CitySelect with DiagnosticableTreeMixin implements _CitySelect {
   const _$_CitySelect(
       {this.city = '',
       this.citySearchResults = const [],
+      this.selectedLocation,
       this.result = CitySelectResult.pending})
       : assert(city != null),
         assert(citySearchResults != null),
@@ -123,13 +143,15 @@ class _$_CitySelect with DiagnosticableTreeMixin implements _CitySelect {
   @JsonKey(defaultValue: const [])
   @override
   final List<Location> citySearchResults;
+  @override
+  final Location selectedLocation;
   @JsonKey(defaultValue: CitySelectResult.pending)
   @override
   final dynamic result;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CitySelect(city: $city, citySearchResults: $citySearchResults, result: $result)';
+    return 'CitySelect(city: $city, citySearchResults: $citySearchResults, selectedLocation: $selectedLocation, result: $result)';
   }
 
   @override
@@ -139,6 +161,7 @@ class _$_CitySelect with DiagnosticableTreeMixin implements _CitySelect {
       ..add(DiagnosticsProperty('type', 'CitySelect'))
       ..add(DiagnosticsProperty('city', city))
       ..add(DiagnosticsProperty('citySearchResults', citySearchResults))
+      ..add(DiagnosticsProperty('selectedLocation', selectedLocation))
       ..add(DiagnosticsProperty('result', result));
   }
 
@@ -151,6 +174,9 @@ class _$_CitySelect with DiagnosticableTreeMixin implements _CitySelect {
             (identical(other.citySearchResults, citySearchResults) ||
                 const DeepCollectionEquality()
                     .equals(other.citySearchResults, citySearchResults)) &&
+            (identical(other.selectedLocation, selectedLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedLocation, selectedLocation)) &&
             (identical(other.result, result) ||
                 const DeepCollectionEquality().equals(other.result, result)));
   }
@@ -160,6 +186,7 @@ class _$_CitySelect with DiagnosticableTreeMixin implements _CitySelect {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(citySearchResults) ^
+      const DeepCollectionEquality().hash(selectedLocation) ^
       const DeepCollectionEquality().hash(result);
 
   @JsonKey(ignore: true)
@@ -172,12 +199,15 @@ abstract class _CitySelect implements CitySelect {
   const factory _CitySelect(
       {String city,
       List<Location> citySearchResults,
+      Location selectedLocation,
       dynamic result}) = _$_CitySelect;
 
   @override
   String get city;
   @override
   List<Location> get citySearchResults;
+  @override
+  Location get selectedLocation;
   @override
   dynamic get result;
   @override

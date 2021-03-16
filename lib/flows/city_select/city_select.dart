@@ -11,6 +11,7 @@ abstract class CitySelect with _$CitySelect {
   const factory CitySelect({
     @Default('') String city,
     @Default([]) List<Location> citySearchResults,
+    Location selectedLocation,
     @Default(CitySelectResult.pending) result,
   }) = _CitySelect;
 }

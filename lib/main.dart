@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:multiweather/flows/flows.dart';
 
+import 'app/locator.dart';
+
 void main() {
+  setupDependencies();
   runApp(MyApp());
 }
 
@@ -43,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           message = 'User canceled city selection.';
           break;
         case CitySelectResult.complete:
-          message = 'User chose: ${citiesSetup.city}';
+          message = 'User chose: ${citiesSetup.selectedLocation.title}';
           break;
         case CitySelectResult.failed:
           message = 'Picking a city failed.';

@@ -9,6 +9,11 @@ class WeatherRepository {
 
   final MetaWeatherApiClient _weatherApiClient;
 
+  Future<List<Location>> locationSearch(String query) async {
+    final locations = await _weatherApiClient.locationSearch(query);
+    return locations;
+  }
+
   Future<Weather> getWeather(Location location) async {
     final weather = await _weatherApiClient.getWeather(location.woeid);
     return Weather(

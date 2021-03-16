@@ -17,10 +17,13 @@ dependencies:
   flutter_bloc:
   flutter_dotenv: ^2.1.0
   flutter_google_places:
+  flutter_icons: ^1.1.0
   flutter_localizations:
     sdk: flutter
   flutter_spinkit:
   freezed_annotation:
+  get_it:
+  http:
   intl:
   meta_weather_api:
     path: packages/meta_weather_api
@@ -37,6 +40,8 @@ dev_dependencies:
   pedantic:
   bloc_test:
   freezed:
+  test:
+  test_coverage:
   mockito:
   build_runner:
 
