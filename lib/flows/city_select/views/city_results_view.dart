@@ -113,13 +113,31 @@ class _CitySearchResults extends StatelessWidget {
   Widget _defaultChild(BuildContext context, BoxConstraints constraints) {
     final theme = Theme.of(context);
     final loader = SpinKitChasingDots(color: theme.primaryColor);
+    final child = state.maybeMap<Widget>(
+      orElse: () {
+        return loader;
+      },
+      loaded: (state) {
+        return Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Icon(AntDesign.frowno),
+            ),
+            Text('No results found.'),
+          ],
+        );
+      },
+    );
     return Container(
       padding: const EdgeInsets.all(16.0),
       constraints: BoxConstraints(
         minHeight: constraints.maxHeight,
       ),
       child: Center(
-        child: loader,
+        child: child,
       ),
     );
   }

@@ -33,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _nestedNavigatorKey = GlobalKey<NavigatorState>();
+
   /// Trigger the city select flow
   Future<void> Function() _addCity(BuildContext context) {
     return () async {
@@ -41,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         print('Flow changed: ${citySelectFlowController.state}');
       });
       // Start the city select flow.
-      final citySelect = await Navigator.of(context).push(
+      final citySelect = await _nestedNavigatorKey.currentState.push(
         CitySelectFlow.route(controller: citySelectFlowController),
       );
       // After finishing the flow, check to see how the flow finished
@@ -71,26 +73,46 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Tap the + button to get started',
-                style: Theme.of(context).textTheme.headline6,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+      body: Navigator(
+        key: _nestedNavigatorKey,
+        initialRoute: '/',
+        onGenerateRoute: (route) {
+          if (route.name == '/') {
+            return MaterialPageRoute(
+              builder: (context) {
+                return _DefaultView();
+              },
+            );
+          }
+          return null;
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addCity(context),
-        tooltip: 'Increment',
+        tooltip: 'Add City',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class _DefaultView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Tap the + button to get started',
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
