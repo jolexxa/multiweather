@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meta_weather_api/meta_weather_api.dart';
 import 'package:multiweather/flows/city_select/city_select_flow.dart';
 import 'package:weather_repository/weather_repository.dart';
@@ -42,15 +43,20 @@ class _CityResultsViewState extends State<CityResultsView> {
         builder: (context, state) {
           return AppView(
             title: Text('🏠 Search Results'),
-            child: _CitySearchResults(
-              state: state,
-              // User tapped a city--complete the flow successfully.
-              onSelect: (location) => flow.complete(
-                (state) => state.copyWith(
-                  selectedLocation: location,
-                  result: CitySelectResult.complete,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _CitySearchResults(
+                  state: state,
+                  // User tapped a city--complete the flow successfully.
+                  onSelect: (location) => flow.complete(
+                    (state) => state.copyWith(
+                      selectedLocation: location,
+                      result: CitySelectResult.complete,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           );
         },
@@ -74,24 +80,46 @@ class _CitySearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedList(
-      key: _listKey,
-      initialItemCount: max(1, state.locationSearchResults.length),
-      itemBuilder: (context, index, animation) {
-        if (index == 0 && noResults) {
-          return _defaultChild(context);
-        }
-        return _CitySearchResult(
-          key: ValueKey(state.locationSearchResults[index].woeid),
-          location: state.locationSearchResults[index],
-          onSelect: (location) => onSelect(location),
-        );
-      },
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (context, constraints) => AnimatedList(
+          key: _listKey,
+          initialItemCount: max(1, state.locationSearchResults.length),
+          itemBuilder: (context, index, animation) {
+            if (index == 0 && noResults) {
+              return _defaultChild(context, constraints);
+            }
+            return _CitySearchResult(
+              key: ValueKey(state.locationSearchResults[index].woeid),
+              location: state.locationSearchResults[index],
+              onSelect: (location) => onSelect(location),
+            );
+          },
+        ),
+      ),
     );
   }
 
-  Widget _defaultChild(BuildContext context) {
-    return Text('Default child');
+  Widget _defaultChild(BuildContext context, BoxConstraints constraints) {
+    final theme = Theme.of(context);
+    final loader = SpinKitChasingDots(color: theme.primaryColor);
+    final child = state.maybeMap(
+      orElse: () {
+        return loader;
+      },
+      loading: (state) {
+        return loader;
+      },
+    );
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      constraints: BoxConstraints(
+        minHeight: constraints.maxHeight,
+      ),
+      child: Center(
+        child: child,
+      ),
+    );
   }
 }
 
