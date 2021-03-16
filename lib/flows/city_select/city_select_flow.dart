@@ -7,22 +7,23 @@ import 'city_select.dart';
 export 'city_select.dart';
 
 class CitySelectFlow extends StatelessWidget {
-  static Route<CitySelect> route({@required CitySelect initialState}) {
+  static Route<CitySelect> route(
+      {@required FlowController<CitySelect> controller}) {
     return MaterialPageRoute(
       builder: (_) => CitySelectFlow(
-        initialState: initialState,
+        controller: controller,
       ),
     );
   }
 
-  CitySelectFlow({Key key, @required this.initialState}) : super(key: key);
+  CitySelectFlow({Key key, @required this.controller}) : super(key: key);
 
-  final CitySelect initialState;
+  final FlowController<CitySelect> controller;
 
   @override
   Widget build(BuildContext context) {
     return FlowBuilder<CitySelect>(
-      state: initialState,
+      controller: controller,
       onGeneratePages: onGeneratePages,
     );
   }

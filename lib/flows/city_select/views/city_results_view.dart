@@ -39,7 +39,17 @@ class _CityResultsViewState extends State<CityResultsView> {
           ),
         ),
       child: BlocConsumer<CitySearchBloc, CitySearchState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          state.maybeMap(
+            orElse: () {},
+            failed: (state) {
+              // Failed to fetch results...for now we just cancel the flow.
+              flow.complete(
+                (state) => state.copyWith(result: CitySelectResult.failed),
+              );
+            },
+          );
+        },
         builder: (context, state) {
           return AppView(
             title: Text('🏠 Search Results'),
@@ -103,21 +113,13 @@ class _CitySearchResults extends StatelessWidget {
   Widget _defaultChild(BuildContext context, BoxConstraints constraints) {
     final theme = Theme.of(context);
     final loader = SpinKitChasingDots(color: theme.primaryColor);
-    final child = state.maybeMap(
-      orElse: () {
-        return loader;
-      },
-      loading: (state) {
-        return loader;
-      },
-    );
     return Container(
       padding: const EdgeInsets.all(16.0),
       constraints: BoxConstraints(
         minHeight: constraints.maxHeight,
       ),
       child: Center(
-        child: child,
+        child: loader,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:multiweather/flows/flows.dart';
 
@@ -32,21 +33,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  /// Trigger the city select flow
   Future<void> Function() _addCity(BuildContext context) {
     return () async {
+      final citySelectFlowController = FlowController<CitySelect>(CitySelect());
+      citySelectFlowController.addListener(() {
+        print('Flow changed: ${citySelectFlowController.state}');
+      });
       // Start the city select flow.
-      final citiesSetup = await Navigator.of(context).push(
-        CitySelectFlow.route(initialState: CitySelect()),
+      final citySelect = await Navigator.of(context).push(
+        CitySelectFlow.route(controller: citySelectFlowController),
       );
       // After finishing the flow, check to see how the flow finished
       // and respond/navigate appropriately.
       var message = '';
-      switch (citiesSetup.result) {
+      switch (citySelect.result) {
         case CitySelectResult.canceled:
           message = 'User canceled city selection.';
           break;
         case CitySelectResult.complete:
-          message = 'User chose: ${citiesSetup.selectedLocation.title}';
+          message = 'User chose: ${citySelect.selectedLocation.title}';
           break;
         case CitySelectResult.failed:
           message = 'Picking a city failed.';
@@ -66,17 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'Okie doke',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Tap the + button to get started',
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
